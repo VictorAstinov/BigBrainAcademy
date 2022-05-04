@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BigBrainAcademy">
         <activity
+            android:name=".TestScreen"
+            android:exported="false" />
+        <activity
+            android:name=".PracticeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".ChoiceScreen"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

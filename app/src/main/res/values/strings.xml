@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BigBrainAcademy</string>
+    <string name="start_screen_button">Begin!</string>
+    <string name="choice_screen_test_button">Test!</string>
+    <string name="choice_screen_practice_button">Practice!</string>
 </resources>
