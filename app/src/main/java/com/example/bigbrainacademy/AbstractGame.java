@@ -2,9 +2,9 @@ package com.example.bigbrainacademy;
 
 public abstract class AbstractGame {
     // private attributes common to all games
-    private int correct_streak;
-    private DifficultyLevel diff = DifficultyLevel.SPROUT;
-    private double score;
+    protected int correct_streak;
+    protected DifficultyLevel diff = DifficultyLevel.SPROUT;
+    protected double score;
     // Constructor, currently doesn't do much. Could be useful later
     AbstractGame() {
         correct_streak = 0;
