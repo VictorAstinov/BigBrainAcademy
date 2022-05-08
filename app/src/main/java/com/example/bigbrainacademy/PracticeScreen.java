@@ -2,13 +2,33 @@ package com.example.bigbrainacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import com.example.bigbrainacademy.databinding.ActivityPracticeScreenBinding;
+
+import java.util.ArrayList;
 
 // view for the practice menu
-public class PracticeScreen extends AppCompatActivity {
-
+public class PracticeScreen extends AppCompatActivity implements ActivityInterface {
+  ActivityPracticeScreenBinding bind;
+  View view;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_practice_screen);
+    init_view();
+    init_buttons();
+  }
+
+  @Override
+  public void init_view() {
+    bind = ActivityPracticeScreenBinding.inflate(getLayoutInflater());
+    view = bind.getRoot();
+    setContentView(view);
+  }
+
+  @Override
+  public void init_buttons() {
+
   }
 }

@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".TestScreen">
 
+    <TextView
+        android:id="@+id/test_screen_timer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

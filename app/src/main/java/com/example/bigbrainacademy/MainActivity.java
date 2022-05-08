@@ -10,24 +10,30 @@ import com.example.bigbrainacademy.databinding.ActivityMainBinding;
 
 
 // view for the app launch screen
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ActivityInterface {
+  private View view;
+  private ActivityMainBinding bind;
+  // entry point for app
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    // create binding layout
-    ActivityMainBinding bind = ActivityMainBinding.inflate(getLayoutInflater());
-    View view = bind.getRoot();
-    setContentView(view);
-    Button start_button = findViewById(R.id.start_screen_button);
+    init_view();
+    init_buttons();
     //start_button.setBackgroundColor(Color.RED);
     /*
     // add start button feature (for now just change color to red)
     start_button.setOnclickListener((c) -> start_button.setBackgroundColor(Color.RED))
     .*/
-
-    // this uses a lambda with the onClickListener to go to the next activity screen
-    start_button.setOnClickListener((x) -> startActivity(new Intent(MainActivity
-    .this, ChoiceScreen.class)));
-
+  }
+  @Override
+  public void init_view() {
+    bind = ActivityMainBinding.inflate(getLayoutInflater());
+    view = bind.getRoot();
+    setContentView(view);
+  }
+  @Override
+  public void init_buttons() {
+    Button start_button = findViewById(R.id.start_screen_button);
+    start_button.setOnClickListener((x) -> startActivity(new Intent(MainActivity.this, ChoiceScreen.class)));
   }
 }
