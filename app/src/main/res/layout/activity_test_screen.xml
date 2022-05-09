@@ -10,9 +10,11 @@
         android:id="@+id/test_screen_timer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40sp"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.example.bigbrainacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +27,10 @@ public class PracticeScreen extends AppCompatActivity implements ActivityInterfa
     bind = ActivityPracticeScreenBinding.inflate(getLayoutInflater());
     view = bind.getRoot();
     setContentView(view);
+    startActivity(new Intent(this, WrittenMathScreen.class));
   }
 
   @Override
   public void init_buttons() {
-
   }
 }

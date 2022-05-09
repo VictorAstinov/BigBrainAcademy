@@ -16,5 +16,4 @@ public abstract class AbstractGame {
 
     }
     // pure virtual functions to be overridden by subclasses
-
 }

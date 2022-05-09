@@ -1,4 +1,4 @@
 package com.example.bigbrainacademy;
 
-public class AbstractThinkGame extends AbstractGame{
+public class AbstractThinkGame extends AbstractGame {
 }

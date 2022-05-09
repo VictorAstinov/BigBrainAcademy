@@ -1,17 +1,21 @@
 package com.example.bigbrainacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.bigbrainacademy.databinding.ActivityTestScreenBinding;
 
 // view for the test part of the game
-public class TestScreen extends AppCompatActivity implements ActivityInterface{
-  ActivityTestScreenBinding bind;
-  View view;
+public class TestScreen extends AppCompatActivity implements ActivityInterface {
+  private ActivityTestScreenBinding bind;
+  private View view;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -32,6 +36,7 @@ public class TestScreen extends AppCompatActivity implements ActivityInterface{
       @Override
       public void onFinish() {
         text.setText(R.string.test_screen_countdown_end);
+        startActivity(new Intent(TestScreen.this, WrittenMathScreen.class));
       }
     }.start();
   }

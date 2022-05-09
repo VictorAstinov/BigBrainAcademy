@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import com.example.bigbrainacademy.databinding.ActivityMainBinding;
 
@@ -29,11 +30,14 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
   public void init_view() {
     bind = ActivityMainBinding.inflate(getLayoutInflater());
     view = bind.getRoot();
+    /* toggles full screen
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+     */
     setContentView(view);
   }
   @Override
   public void init_buttons() {
     Button start_button = findViewById(R.id.start_screen_button);
-    start_button.setOnClickListener((x) -> startActivity(new Intent(MainActivity.this, ChoiceScreen.class)));
+    start_button.setOnClickListener((x) -> startActivity(new Intent(this, ChoiceScreen.class)));
   }
 }

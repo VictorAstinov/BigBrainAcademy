@@ -12,6 +12,7 @@ import com.example.bigbrainacademy.databinding.ActivityMainBinding;
 public class ChoiceScreen extends AppCompatActivity implements ActivityInterface{
   private View view;
   private ActivityChoiceScreenBinding bind;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
