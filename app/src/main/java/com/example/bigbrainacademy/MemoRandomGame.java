@@ -39,9 +39,12 @@ public class MemoRandomGame extends AbstractMemorizeGame {
         // Constructor for test purposes only
         public MemorizeGrid(boolean prototype) {
             grid = new ArrayList<>();
+            options = new ArrayList<>(); // to fix null reference exception
             ArrayList<Integer> arr = new ArrayList<>();
-            arr.add(0); options.add(0);
-            arr.add(1); options.add(1);
+            arr.add(0);
+            options.add(0);
+            arr.add(1);
+            options.add(1);
             grid.add(arr);
             height = 1;
         }
