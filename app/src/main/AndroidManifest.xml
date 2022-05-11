@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BigBrainAcademy">
         <activity
+            android:name=".MemoRandomScreen"
+            android:exported="false" />
+        <activity
             android:name=".WrittenMathScreen"
             android:exported="false" />
         <activity

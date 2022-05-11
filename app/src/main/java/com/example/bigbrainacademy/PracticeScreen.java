@@ -27,7 +27,7 @@ public class PracticeScreen extends AppCompatActivity implements ActivityInterfa
     bind = ActivityPracticeScreenBinding.inflate(getLayoutInflater());
     view = bind.getRoot();
     setContentView(view);
-    startActivity(new Intent(this, WrittenMathScreen.class));
+    startActivity(new Intent(this, MemoRandomScreen.class));
   }
 
   @Override
