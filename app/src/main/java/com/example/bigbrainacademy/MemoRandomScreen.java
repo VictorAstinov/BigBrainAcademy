@@ -66,7 +66,7 @@ public class MemoRandomScreen extends AppCompatActivity implements ActivityInter
         // TODO: make this better
         String idName = "memorandom_icon_" + Integer.toString(index);
         int resID = getResources().getIdentifier(idName,"id", getPackageName());
-        return findViewById(resID);
+        return findViewById(resID); // resID has a value of 0, I assume that this causes findViewByID to return null
     }
 
 }
