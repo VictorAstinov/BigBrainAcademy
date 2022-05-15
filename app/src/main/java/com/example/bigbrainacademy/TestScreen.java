@@ -16,6 +16,8 @@ import com.example.bigbrainacademy.databinding.ActivityTestScreenBinding;
 public class TestScreen extends AppCompatActivity implements ActivityInterface {
   private ActivityTestScreenBinding bind;
   private View view;
+  private CountDownTimer timer = null;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class TestScreen extends AppCompatActivity implements ActivityInterface {
   }
 
   private void countdown_timer(final int time, TextView text) {
-    new CountDownTimer(time * 1000, 1000) {
+    timer = new CountDownTimer(time * 1000, 1000) {
       int t = time;
       @Override
       public void onTick(long l) {
@@ -38,7 +40,8 @@ public class TestScreen extends AppCompatActivity implements ActivityInterface {
         text.setText(R.string.test_screen_countdown_end);
         startActivity(new Intent(TestScreen.this, WrittenMathScreen.class));
       }
-    }.start();
+    };
+    timer.start();
   }
 
   @Override
@@ -51,5 +54,17 @@ public class TestScreen extends AppCompatActivity implements ActivityInterface {
     bind = ActivityTestScreenBinding.inflate(getLayoutInflater());
     view = bind.getRoot();
     setContentView(view);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    endTimer();
+  }
+
+  private void endTimer() {
+    if (timer != null) {
+      timer.cancel();
+    }
   }
 }

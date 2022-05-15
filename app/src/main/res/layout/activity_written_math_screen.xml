@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#75A5CB"
+    android:background="@color/CadetBlue"
     android:padding="40dp">
 
     <TextView
@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="280dp"
-        android:background="#ffffff"
+        android:background="@drawable/rounded_corner_textview"
+        android:textColor="@color/white"
         android:gravity="center"
         android:minWidth="200dp"
         android:padding="4dp"
@@ -28,7 +29,6 @@
         android:layout_height="70dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/written_math_button"
-
         android:text="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
@@ -176,5 +176,36 @@
         app:layout_constraintEnd_toEndOf="@+id/calc_8"
         app:layout_constraintStart_toStartOf="@+id/calc_8"
         app:layout_constraintTop_toBottomOf="@+id/calc_8" />
+
+    <TextView
+        android:id="@+id/prob_box_written_math_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="420dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:minWidth="250dp"
+        android:minHeight="100dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/timer_box_written_math"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp"
+        android:text=""
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

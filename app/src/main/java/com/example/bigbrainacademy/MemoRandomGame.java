@@ -67,12 +67,12 @@ public class MemoRandomGame extends AbstractMemorizeGame {
          */
         private int maxRows() {
             switch(diff) {
-                case SPROUT: return 1;
-                case BEGIN: return 1;
-                case INTER: return 2;
-                case ADVANCE: return 2;
-                case ELITE: return 2;
-                case S_ELITE: return 3;
+                case 1: return 1;
+                case 2: return 1;
+                case 3: return 2;
+                case 4: return 2;
+                case 5: return 2;
+                case 6: return 3;
             }
             throw new IllegalStateException();
         }
@@ -83,12 +83,12 @@ public class MemoRandomGame extends AbstractMemorizeGame {
          */
         private int maxCols() {
             switch(diff) {
-                case SPROUT: return 2;
-                case BEGIN: return 3;
-                case INTER: return 3;
-                case ADVANCE: return 4;
-                case ELITE: return 4;
-                case S_ELITE: return 5;
+                case 0: return 2;
+                case 1: return 3;
+                case 2: return 3;
+                case 3: return 4;
+                case 4: return 4;
+                case 5: return 5;
             }
             throw new IllegalStateException();
         }
@@ -99,12 +99,12 @@ public class MemoRandomGame extends AbstractMemorizeGame {
          */
         private int hiddenImageCount() {
             switch(diff) {
-                case SPROUT: return 1;
-                case BEGIN: return rand.nextInt(2) + 1;
-                case INTER: return 2;
-                case ADVANCE: return 3;
-                case ELITE: return rand.nextInt(2) + 3;
-                case S_ELITE: return rand.nextInt(3) + 3;
+                case 1: return 1;
+                case 2: return rand.nextInt(2) + 1;
+                case 3: return 2;
+                case 4: return 3;
+                case 5: return rand.nextInt(2) + 3;
+                case 6: return rand.nextInt(3) + 3;
             }
             throw new IllegalStateException();
         }

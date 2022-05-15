@@ -9,8 +9,11 @@
         <entry key="..\:/Users/Owner/StudioProjects/BigBrainAcademy/app/src/main/res/layout/activity_test_screen.xml" value="0.1078125" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.262" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.262" />
+        <entry key="app/src/main/res/drawable/rounded_corner_textview.xml" value="0.286" />
+        <entry key="app/src/main/res/drawable/written_math_button.xml" value="0.286" />
         <entry key="app/src/main/res/drawable/written_math_button_press.xml" value="0.262" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11277173913043478" />
+        <entry key="app/src/main/res/layout/activity_memo_random_screen.xml" value="0.13632246376811594" />
         <entry key="app/src/main/res/layout/activity_practice_screen.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_test_screen.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_written_math_screen.xml" value="0.25" />
