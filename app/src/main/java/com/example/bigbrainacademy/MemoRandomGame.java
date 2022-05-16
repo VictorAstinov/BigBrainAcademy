@@ -30,6 +30,7 @@ public class MemoRandomGame extends AbstractMemorizeGame {
     private class MemorizeGrid {
         private ArrayList<ArrayList<Integer>> grid;
         private ArrayList<Integer> options;
+        private ArrayList<Coordinate> hiddenCoordinates;
         private int maxHeight;
         private int maxWidth;
         private int numHidden;
@@ -39,7 +40,8 @@ public class MemoRandomGame extends AbstractMemorizeGame {
         // Constructor for test purposes only
         public MemorizeGrid(boolean prototype) {
             grid = new ArrayList<>();
-            options = new ArrayList<>(); // to fix null reference exception
+            options = new ArrayList<>();
+            hiddenCoordinates = new ArrayList<>();
             ArrayList<Integer> arr = new ArrayList<>();
             arr.add(0);
             options.add(0);
@@ -47,18 +49,26 @@ public class MemoRandomGame extends AbstractMemorizeGame {
             options.add(1);
             grid.add(arr);
             height = 1;
+            setHiddenCoordinates();
         }
 
         public MemorizeGrid() {
             this.maxHeight = maxRows();
             this.maxWidth = maxCols();
             this.numHidden = hiddenImageCount();
+            this.options = new ArrayList<>();
+            this.hiddenCoordinates = new ArrayList<>();
 
             generateGrid();
         }
 
         private void generateGrid() {
 
+
+
+
+
+            setHiddenCoordinates();
         }
 
         /**
@@ -114,6 +124,7 @@ public class MemoRandomGame extends AbstractMemorizeGame {
         }
 
         public int getHeight() { return this.height; }
+        public int getRowWidth(int rowIndex) { return this.grid.get(rowIndex).size(); }
 
         public ArrayList<Integer> getRow(int level) {
             if (level >= 0 && level < height) {
@@ -122,6 +133,15 @@ public class MemoRandomGame extends AbstractMemorizeGame {
             else {
                 return null;
             }
+        }
+
+        private void setHiddenCoordinates() {
+            //TODO: implement properly
+            hiddenCoordinates.add(new Coordinate(0,0));
+        }
+
+        public ArrayList<Coordinate> getHiddenCoordinates() {
+            return hiddenCoordinates;
         }
     }
 
@@ -138,6 +158,8 @@ public class MemoRandomGame extends AbstractMemorizeGame {
 
     public int getHeight() { return this.memorizeGrid.getHeight(); }
 
+    public int getRowLength(int rowIndex) { return this.memorizeGrid.getRowWidth(rowIndex); }
+
     public ArrayList<Integer> getRow(int level) {
         if (level >= 0 && level < getHeight()) {
             return memorizeGrid.getRow(level);
@@ -145,5 +167,9 @@ public class MemoRandomGame extends AbstractMemorizeGame {
         else {
             return null;
         }
+    }
+
+    public ArrayList<Coordinate> getHiddenCoordinates() {
+        return memorizeGrid.getHiddenCoordinates();
     }
 }
