@@ -38,7 +38,8 @@ public class TestScreen extends AppCompatActivity implements ActivityInterface {
       @Override
       public void onFinish() {
         text.setText(R.string.test_screen_countdown_end);
-        startActivity(new Intent(TestScreen.this, WrittenMathScreen.class));
+        // modify to launch desired activity
+        startActivity(new Intent(TestScreen.this, FlashMemoryScreen.class));
       }
     };
     timer.start();

@@ -1,5 +1,10 @@
 package com.example.bigbrainacademy;
 
+import android.os.CountDownTimer;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
 public abstract class AbstractGame {
     // private attributes common to all games
     protected int correct_streak;
@@ -13,7 +18,7 @@ public abstract class AbstractGame {
     }
     // private methods common to all games
     // basic function for incrementing difficulty, will be modified later
-    public void incDifficulty(boolean wasRight) {
+    protected void incDifficulty(boolean wasRight) {
         if (wasRight) {
             if (diff < DifficultyLevel.INTER.getValue()) {
                 ++diff;
@@ -23,5 +28,6 @@ public abstract class AbstractGame {
             --diff;
         }
     }
+
     // pure virtual functions to be overridden by subclasses
 }

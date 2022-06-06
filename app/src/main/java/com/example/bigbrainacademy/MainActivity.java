@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
   public void init_view() {
     bind = ActivityMainBinding.inflate(getLayoutInflater());
     view = bind.getRoot();
-    /* toggles full screen
-    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-     */
     setContentView(view);
   }
   @Override

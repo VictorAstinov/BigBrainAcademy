@@ -9,7 +9,7 @@ import com.example.bigbrainacademy.databinding.ActivityChoiceScreenBinding;
 import com.example.bigbrainacademy.databinding.ActivityMainBinding;
 
 // view for the choice screen after the app launch screen
-public class ChoiceScreen extends AppCompatActivity implements ActivityInterface{
+public class ChoiceScreen extends AppCompatActivity implements ActivityInterface {
   private View view;
   private ActivityChoiceScreenBinding bind;
 

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BigBrainAcademy</string>
     <string name="start_screen_button">Begin!</string>
-    <string name="written_math_end_timer">End!</string>
+    <string name="end_timer_string">End!</string>
     <string name="choice_screen_test_button">Test!</string>
     <string name="choice_screen_practice_button">Practice!</string>
     <string name="test_screen_countdown_end">Start!</string>

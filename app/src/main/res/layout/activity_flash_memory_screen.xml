@@ -8,15 +8,17 @@
     android:padding="40dp">
 
     <TextView
-        android:id="@+id/input_box_written_math"
+        android:id="@+id/input_box_flash_memory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/rounded_corner_textview"
         android:textColor="@color/white"
         android:gravity="center"
-        android:minWidth="200dp"
+        android:minWidth="250dp"
+        android:minHeight="70dp"
         android:padding="4dp"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +26,7 @@
         />
 
     <Button
-        android:id="@+id/calc_pad_1"
+        android:id="@+id/flash_pad_1"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="30dp"
@@ -32,169 +34,169 @@
         android:text="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintEnd_toStartOf="@+id/calc_pad_2"
+        app:layout_constraintEnd_toStartOf="@+id/flash_pad_2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_box_written_math" />
+        app:layout_constraintTop_toBottomOf="@+id/input_box_flash_memory" />
 
     <Button
-        android:id="@+id/calc_pad_2"
+        android:id="@+id/flash_pad_2"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="2"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/calc_pad_1"
-        app:layout_constraintEnd_toStartOf="@+id/calc_pad_3"
+        app:layout_constraintBottom_toBottomOf="@+id/flash_pad_1"
+        app:layout_constraintEnd_toStartOf="@+id/flash_pad_3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/calc_pad_1"
-        app:layout_constraintTop_toTopOf="@+id/calc_pad_1" />
+        app:layout_constraintStart_toEndOf="@+id/flash_pad_1"
+        app:layout_constraintTop_toTopOf="@+id/flash_pad_1" />
 
     <Button
-        android:id="@+id/calc_pad_3"
+        android:id="@+id/flash_pad_3"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="3"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/calc_pad_1"
+        app:layout_constraintBottom_toBottomOf="@+id/flash_pad_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/calc_pad_2"
-        app:layout_constraintTop_toTopOf="@+id/calc_pad_1" />
+        app:layout_constraintStart_toEndOf="@+id/flash_pad_2"
+        app:layout_constraintTop_toTopOf="@+id/flash_pad_1" />
 
     <Button
-        android:id="@+id/calc_pad_4"
+        android:id="@+id/flash_pad_4"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="4"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintEnd_toStartOf="@+id/calc_pad_5"
+        app:layout_constraintEnd_toStartOf="@+id/flash_pad_5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calc_pad_1" />
+        app:layout_constraintTop_toBottomOf="@+id/flash_pad_1" />
 
     <Button
-        android:id="@+id/calc_pad_5"
+        android:id="@+id/flash_pad_5"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="5"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/calc_pad_4"
-        app:layout_constraintEnd_toStartOf="@+id/calc_pad_6"
+        app:layout_constraintBottom_toBottomOf="@+id/flash_pad_4"
+        app:layout_constraintEnd_toStartOf="@+id/flash_pad_6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/calc_pad_1"
-        app:layout_constraintTop_toTopOf="@+id/calc_pad_4" />
+        app:layout_constraintStart_toEndOf="@+id/flash_pad_1"
+        app:layout_constraintTop_toTopOf="@+id/flash_pad_4" />
 
     <Button
-        android:id="@+id/calc_pad_6"
+        android:id="@+id/flash_pad_6"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="6"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/calc_pad_4"
+        app:layout_constraintBottom_toBottomOf="@+id/flash_pad_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/calc_pad_5"
-        app:layout_constraintTop_toTopOf="@+id/calc_pad_4" />
+        app:layout_constraintStart_toEndOf="@+id/flash_pad_5"
+        app:layout_constraintTop_toTopOf="@+id/flash_pad_4" />
 
     <Button
-        android:id="@+id/calc_pad_7"
+        android:id="@+id/flash_pad_7"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="7"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintEnd_toStartOf="@+id/calc_pad_8"
+        app:layout_constraintEnd_toStartOf="@+id/flash_pad_8"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calc_pad_4" />
+        app:layout_constraintTop_toBottomOf="@+id/flash_pad_4" />
 
     <Button
-        android:id="@+id/calc_pad_8"
+        android:id="@+id/flash_pad_8"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="8"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/calc_pad_7"
-        app:layout_constraintEnd_toStartOf="@+id/calc_pad_9"
+        app:layout_constraintBottom_toBottomOf="@+id/flash_pad_7"
+        app:layout_constraintEnd_toStartOf="@+id/flash_pad_9"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/calc_pad_4"
-        app:layout_constraintTop_toTopOf="@+id/calc_pad_7" />
+        app:layout_constraintStart_toEndOf="@+id/flash_pad_4"
+        app:layout_constraintTop_toTopOf="@+id/flash_pad_7" />
 
     <Button
-        android:id="@+id/calc_pad_9"
+        android:id="@+id/flash_pad_9"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="9"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/calc_pad_7"
+        app:layout_constraintBottom_toBottomOf="@+id/flash_pad_7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/calc_pad_8"
-        app:layout_constraintTop_toTopOf="@+id/calc_pad_7" />
+        app:layout_constraintStart_toEndOf="@+id/flash_pad_8"
+        app:layout_constraintTop_toTopOf="@+id/flash_pad_7" />
+
 
     <Button
-        android:id="@+id/calc_pad_0"
-        android:layout_width="70dp"
+        android:id="@+id/flash_pad_0"
+        android:layout_width="170dp"
         android:layout_height="70dp"
         android:background="@drawable/written_math_button"
         android:text="0"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ffffff"
-        app:layout_constraintEnd_toEndOf="@+id/calc_pad_8"
-        app:layout_constraintStart_toStartOf="@+id/calc_pad_8"
-        app:layout_constraintTop_toBottomOf="@+id/calc_pad_8" />
+        app:layout_constraintEnd_toEndOf="@+id/flash_pad_7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/flash_pad_7"
+        app:layout_constraintTop_toBottomOf="@+id/flash_pad_7" />
 
-    <TextView
-        android:id="@+id/prob_box_written_math_screen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="420dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:minWidth="250dp"
-        android:minHeight="100dp"
+    <Button
+        android:id="@+id/flash_pad_special"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/written_math_button"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="@+id/flash_pad_9"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/flash_pad_0"
+        app:layout_constraintTop_toBottomOf="@+id/flash_pad_9"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/timer_box_written_math"
+        android:id="@+id/timer_box_flash_memory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

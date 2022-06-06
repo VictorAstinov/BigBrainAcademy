@@ -53,6 +53,7 @@ public class WrittenMath extends AbstractComputeGame {
 
     // TODO: make this better, div needs better generation
     private void setTemplates(int diff_level, ArrayList<EqnTemplate> list) {
+
         if (diff_level == DifficultyLevel.SPROUT.getValue()) {
             // basic single addition
             list.add(new EqnTemplate(asList(10,5), asList(MathOperators.ADD)));
@@ -137,8 +138,8 @@ public class WrittenMath extends AbstractComputeGame {
     // use 2 or 3 step generation to ensure subtraction is not < 0, division has no remainder
     // TODO: set bottom limits (replace + 1 with something else)
     private EqnTemplate getValues() {
-        ArrayList<EqnTemplate> temp_list = diffTemplates.get(diff);
-        EqnTemplate template = temp_list.get(rng.nextInt(temp_list.size())); // randomly select template
+        int size = diffTemplates.get(diff).size();
+        EqnTemplate template = diffTemplates.get(diff).get(rng.nextInt(size)); // randomly select template
         EqnTemplate ret_val = new EqnTemplate();
         ret_val.ints.add(rng.nextInt(template.ints.get(0)) + 1); // randomly generate 1st number
         for (int i = 0; i < template.ops.size(); ++i) {
@@ -292,19 +293,12 @@ public class WrittenMath extends AbstractComputeGame {
     }
 
     public boolean isCorrect() {
-        return answer.equals(input);
+        boolean wasRight = answer.equals(input);
+        if (wasRight || !isContinue()) {
+            incDifficulty(wasRight);
+        }
+        return wasRight;
     }
 
-    // basic function for incrementing difficulty, will be modified later
-    public void incDifficulty(boolean wasRight) {
-        if (wasRight) {
-            if (diff < DifficultyLevel.INTER.getValue()) {
-                ++diff;
-            }
-        }
-        else {
-          --diff;
-        }
-    }
 
 }
