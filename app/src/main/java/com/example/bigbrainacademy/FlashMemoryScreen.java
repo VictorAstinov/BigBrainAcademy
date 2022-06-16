@@ -1,11 +1,16 @@
 package com.example.bigbrainacademy;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.bigbrainacademy.databinding.ActivityFlashMemoryScreenBinding;
 import com.ibm.icu.text.RuleBasedNumberFormat;
@@ -13,26 +18,28 @@ import com.ibm.icu.text.RuleBasedNumberFormat;
 import java.util.Locale;
 
 public class FlashMemoryScreen extends AbstractActivity implements View.OnClickListener {
-    private ActivityFlashMemoryScreenBinding bind;
     private View view;
     private FlashMemory flashState;
-    CountDownTimer timer = null;
-    private Handler handle = new Handler();
+    private Handler handle = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        createCountdownTimer(60, findViewById(R.id.timer_box_flash_memory));
+        startCountDownScreen();
+        handle.postDelayed(() -> run(), 3000);
     }
 
+    private void run(){
+        createAppRuntimeTimer(10, findViewById(R.id.timer_box_flash_memory));
+        showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem());
+    }
     @Override
     public void init_view() {
-        bind = ActivityFlashMemoryScreenBinding.inflate(getLayoutInflater());
+        ActivityFlashMemoryScreenBinding bind = ActivityFlashMemoryScreenBinding.inflate(getLayoutInflater());
         view = bind.getRoot();
         setContentView(view);
         flashState = new FlashMemory();
-        showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem());
     }
 
     @Override
@@ -108,10 +115,12 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
     private void showAnswerLen(final int time, String answer) {
         TextView text = findViewById(R.id.input_box_flash_memory);
         text.setText(convertIntoWords(answer.length()));
+        toggle_buttons(false);
         handle.postDelayed(() -> showAnswer(text, answer, time), 1000);
     }
 
     private void showAnswer(TextView text, String ans, final int time) {
+        toggle_buttons(true);
         text.setText(ans);
         handle.postDelayed(() -> text.setText(""), time);
     }
@@ -137,28 +146,21 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
         TextView special_button = findViewById(R.id.flash_pad_special);
         special_button.setText(String.valueOf(flashState.getSpecial()));
         if (wasRight) {
-            view.setBackgroundColor(getResources().getColor(R.color.green, getTheme()));
+            changeScreenColor(view, this, 250, R.color.CadetBlue, R.color.green);
+            // view.setBackgroundColor(getResources().getColor(R.color.green, getTheme()));
         }
         else {
-            view.setBackgroundColor(getResources().getColor(R.color.red, getTheme()));
+            changeScreenColor(view, this, 250, R.color.CadetBlue, R.color.red);
         }
-        toggle_buttons(false);
-        new CountDownTimer(250, 250) {
-            @Override
-            public void onTick(long l) { }
+        // toggle_buttons(false);
 
-            @Override
-            public void onFinish() {
-                view.setBackgroundColor(getResources().getColor(R.color.CadetBlue, getTheme()));
-                // toggle_buttons(true);
-                cancel();
-            }
-        }.start();
     }
 
     private void next_question(boolean wasRight) {
         reset_screen(wasRight);
-        showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem());
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem()), 250);
+        // showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem());
     }
 
     private void checkAnswer() {
@@ -173,8 +175,54 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
             }
         }
     }
-
+    @Override
     protected void toggle_buttons(boolean enable) {
+        Button zero = findViewById(R.id.flash_pad_0);
+        Button one = findViewById(R.id.flash_pad_1);
+        Button two = findViewById(R.id.flash_pad_2);
+        Button three = findViewById(R.id.flash_pad_3);
+        Button four = findViewById(R.id.flash_pad_4);
+        Button five = findViewById(R.id.flash_pad_5);
+        Button six = findViewById(R.id.flash_pad_6);
+        Button seven = findViewById(R.id.flash_pad_7);
+        Button eight = findViewById(R.id.flash_pad_8);
+        Button nine = findViewById(R.id.flash_pad_9);
+        zero.setEnabled(enable);
+        one.setEnabled(enable);
+        two.setEnabled(enable);
+        three.setEnabled(enable);
+        four.setEnabled(enable);
+        five.setEnabled(enable);
+        six.setEnabled(enable);
+        seven.setEnabled(enable);
+        eight.setEnabled(enable);
+        nine.setEnabled(enable);
+    }
+
+    @Override
+    protected void toggleScreenContents(boolean areOn) {
+        ConstraintLayout layout = findViewById(R.id.flash_memory_layout);
+        if (areOn) {
+            layout.setVisibility(View.VISIBLE);
+        }
+        else {
+            layout.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected Intent moveToResultsScreen() {
+        finish();
+        Intent intent = new Intent(this, Results_Screen.class);
+        intent.putExtra("TOTAL_SCORE", flashState.getScore());
+        intent.putExtra("TOTAL_CORRECT", flashState.getTotalRight());
+        intent.putExtra("TOTAL_WRONG", flashState.getTotalWrong());
+        intent.putExtra("PREV_SCREEN", ActivityScreenEnum.FlashMemoryScreen);
+        return intent;
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 

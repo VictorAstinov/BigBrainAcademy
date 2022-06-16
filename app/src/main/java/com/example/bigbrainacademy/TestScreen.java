@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.bigbrainacademy.databinding.ActivityTestScreenBinding;
 
 // view for the test part of the game
+// TODO: this behavior should be apart of AbstractActivity, as a class this will be redundant
+// TODO: change the functionality of this class a a loading screen
 public class TestScreen extends AppCompatActivity implements ActivityInterface {
   private ActivityTestScreenBinding bind;
   private View view;
@@ -40,6 +42,7 @@ public class TestScreen extends AppCompatActivity implements ActivityInterface {
         text.setText(R.string.test_screen_countdown_end);
         // modify to launch desired activity
         startActivity(new Intent(TestScreen.this, FlashMemoryScreen.class));
+        finish();
       }
     };
     timer.start();

@@ -172,4 +172,10 @@ public class MemoRandomGame extends AbstractMemorizeGame {
     public ArrayList<Coordinate> getHiddenCoordinates() {
         return memorizeGrid.getHiddenCoordinates();
     }
+
+    // TODO: implement
+    @Override
+    protected void calcScore(boolean wasRight) {
+
+    }
 }

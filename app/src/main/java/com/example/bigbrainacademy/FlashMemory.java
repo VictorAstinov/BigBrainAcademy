@@ -97,10 +97,12 @@ public class FlashMemory extends AbstractMemorizeGame {
         input = in;
     }
 
+    // TODO: should prob decouple
     public boolean isCorrect() {
         boolean wasRight = answer.equals(input);
         if (wasRight || !isContinue()) {
             incDifficulty(wasRight);
+            calcScore(wasRight);
             generateNewSpecial();
         }
         return wasRight;
@@ -121,5 +123,15 @@ public class FlashMemory extends AbstractMemorizeGame {
     // return time that answer will be displayed on screen, in milliseconds
     public int getTimeInterval() {
         return flashTimeinMS;
+    }
+
+    @Override
+    protected void calcScore(boolean wasRight) {
+        if (wasRight) {
+            score += 10 + diff;
+        }
+        else {
+            score -= (5 + diff);
+        }
     }
 }

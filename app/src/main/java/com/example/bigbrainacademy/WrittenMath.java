@@ -138,10 +138,12 @@ public class WrittenMath extends AbstractComputeGame {
     // use 2 or 3 step generation to ensure subtraction is not < 0, division has no remainder
     // TODO: set bottom limits (replace + 1 with something else)
     private EqnTemplate getValues() {
+
         int size = diffTemplates.get(diff).size();
         EqnTemplate template = diffTemplates.get(diff).get(rng.nextInt(size)); // randomly select template
         EqnTemplate ret_val = new EqnTemplate();
         ret_val.ints.add(rng.nextInt(template.ints.get(0)) + 1); // randomly generate 1st number
+
         for (int i = 0; i < template.ops.size(); ++i) {
             ret_val.ops.add(template.ops.get(i));
             if (template.ops.get(i) == MathOperators.SUB) {
@@ -300,5 +302,9 @@ public class WrittenMath extends AbstractComputeGame {
         return wasRight;
     }
 
+    // TODO: implement
+    @Override
+    protected void calcScore(boolean wasRight) {
 
+    }
 }

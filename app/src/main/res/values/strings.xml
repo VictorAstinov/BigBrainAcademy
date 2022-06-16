@@ -11,5 +11,10 @@
     <string name="written_math_div">divided by</string>
     <string name="written_math_blank">\?</string>
     <string name="written_math_mod_pt1">The remainder of</string>
+    <string name="results_screen_continue">Continue</string>
+    <string name="results_screen_tryAgain">Try Again</string>
+    <string name="results_screen_percent">%% Correct: %1$d</string>
+    <string name="results_screen_missed">Missed: %1$d</string>
+    <string name="results_screen_correct">Correct: %1$d</string>
 
 </resources>

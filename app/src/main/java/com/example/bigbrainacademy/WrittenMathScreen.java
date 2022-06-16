@@ -2,8 +2,11 @@ package com.example.bigbrainacademy;
 
 import static com.example.bigbrainacademy.R.*;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +24,7 @@ public class WrittenMathScreen extends AbstractActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         // TODO: Buttons must be initialized after the view, move all init_button calls to the end of init_view
         init();
-        createCountdownTimer(60, findViewById(id.timer_box_written_math));
+        createAppRuntimeTimer(60, findViewById(id.timer_box_written_math));
     }
 
     @Override
@@ -143,36 +146,38 @@ public class WrittenMathScreen extends AbstractActivity implements View.OnClickL
         nine.setEnabled(enable);
     }
 
+    @Override
+    protected void toggleScreenContents(boolean areOn) {
+
+    }
+
     private void next_question(boolean wasRight) {
         reset_screen(wasRight);
-        TextView prob = findViewById(id.prob_box_written_math_screen);
-        prob.setText(calcState.generateProblem());
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {TextView prob = findViewById(id.prob_box_written_math_screen); prob.setText(calcState.generateProblem());}, 250);
+        // TextView prob = findViewById(id.prob_box_written_math_screen);
+        // prob.setText(calcState.generateProblem());
     }
 
     private void reset_screen(boolean wasRight) {
         if (wasRight) {
-            view.setBackgroundColor(getResources().getColor(color.green, getTheme()));
+            changeScreenColor(view, this, 250, R.color.CadetBlue, color.green);
+            // view.setBackgroundColor(getResources().getColor(color.green, getTheme()));
         }
         else {
-            view.setBackgroundColor(getResources().getColor(color.red, getTheme()));
+            changeScreenColor(view, this, 250, R.color.CadetBlue, color.red);
+            // view.setBackgroundColor(getResources().getColor(color.red, getTheme()));
         }
-        toggle_buttons(false);
-        new CountDownTimer(250, 250) {
-            @Override
-            public void onTick(long l) { }
-
-            @Override
-            public void onFinish() {
-                view.setBackgroundColor(getResources().getColor(color.CadetBlue, getTheme()));
-                TextView text = findViewById(id.input_box_written_math);
-                text.setText("");
-                calcState.setInput("");
-                toggle_buttons(true);
-                cancel();
-            }
-        }.start();
     }
 
+    @Override
+    protected Intent moveToResultsScreen() {
+        Intent intent = new Intent(this, Results_Screen.class);
+        intent.putExtra("TOTAL_SCORE", calcState.getScore());
+        intent.putExtra("TOTAL_CORRECT", calcState.getTotalRight());
+        intent.putExtra("TOTAL_WRONG", calcState.getTotalWrong());
+        return intent;
+    }
 
     @Override
     protected void onDestroy() {

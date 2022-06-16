@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flash_memory_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/CadetBlue"
@@ -13,17 +14,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="240dp"
         android:background="@drawable/rounded_corner_textview"
-        android:textColor="@color/white"
         android:gravity="center"
         android:minWidth="250dp"
         android:minHeight="70dp"
         android:padding="4dp"
+        android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/flash_pad_1"
@@ -202,10 +202,10 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40sp"
         android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
