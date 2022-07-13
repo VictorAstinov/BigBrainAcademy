@@ -1,13 +1,13 @@
 package com.example.bigbrainacademy;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -20,18 +20,37 @@ import java.util.Locale;
 public class FlashMemoryScreen extends AbstractActivity implements View.OnClickListener {
     private View view;
     private FlashMemory flashState;
-    private Handler handle = new Handler(Looper.getMainLooper());
+    private boolean handlerEnabled = false;
+    private Handler.Callback callback = msg -> {
+        handlerEnabled = false;
+        return false;
+    };
+    private Handler handle = new Handler(Looper.getMainLooper(), callback);
+
+
+    private void addPostDelayed(Runnable runnable, final int timeInMS) {
+        handlerEnabled = true;
+        handle.postDelayed(runnable, timeInMS);
+    }
+
+    private Runnable clearTextRunnable = () -> {TextView text = findViewById(R.id.input_box_flash_memory); text.setText("");};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // init view + buttons
+        flashState = new FlashMemory();
         init();
-        startCountDownScreen();
-        handle.postDelayed(() -> run(), 3000);
+        // start countdown screen, launch game after timer expires
+        // startCountDownScreen(3, () -> run());
+        run();
     }
 
     private void run(){
-        createAppRuntimeTimer(10, findViewById(R.id.timer_box_flash_memory));
+        // start game and toggle buttons to false to avoid input before answers shows on screen
+        createAppRuntimeTimer(30, findViewById(R.id.timer_box_flash_memory));
+        toggle_buttons(false);
         showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem());
     }
     @Override
@@ -39,11 +58,11 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
         ActivityFlashMemoryScreenBinding bind = ActivityFlashMemoryScreenBinding.inflate(getLayoutInflater());
         view = bind.getRoot();
         setContentView(view);
-        flashState = new FlashMemory();
     }
 
     @Override
     public void init_buttons() {
+        // inits all buttons
         Button zero = findViewById(R.id.flash_pad_0);
         Button one = findViewById(R.id.flash_pad_1);
         Button two = findViewById(R.id.flash_pad_2);
@@ -107,6 +126,12 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
                 digit = flashState.getSpecial();
                 break;
         }
+        // cancel clearing text if handler is active
+        if  (handlerEnabled) {
+            handle.removeCallbacks(clearTextRunnable);
+            handlerEnabled = false;
+        }
+        // add digit and update answer
         flashState.addDigit(digit);
         updateAnswer();
         checkAnswer();
@@ -115,14 +140,17 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
     private void showAnswerLen(final int time, String answer) {
         TextView text = findViewById(R.id.input_box_flash_memory);
         text.setText(convertIntoWords(answer.length()));
-        toggle_buttons(false);
-        handle.postDelayed(() -> showAnswer(text, answer, time), 1000);
+        addPostDelayed(() -> showAnswer(text, answer, time), 1000);
+        // handle.postDelayed(() -> showAnswer(text, answer, time), 1000);
     }
 
     private void showAnswer(TextView text, String ans, final int time) {
+        // allow for user input and show answer
         toggle_buttons(true);
         text.setText(ans);
-        handle.postDelayed(() -> text.setText(""), time);
+        // clear text after given time has elapsed
+        addPostDelayed(clearTextRunnable, time);
+        // handle.postDelayed(() -> text.setText(""), time);
     }
 
 
@@ -142,15 +170,21 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
         // TextView text = findViewById(R.id.input_box_flash_memory);
         // text.setText("");
         flashState.setInput("");
+        toggle_buttons(false);
 
         TextView special_button = findViewById(R.id.flash_pad_special);
         special_button.setText(String.valueOf(flashState.getSpecial()));
+
+        ConstraintLayout layout = findViewById(R.id.flash_memory_layout);
+        ColorDrawable backgroundColor = (ColorDrawable) layout.getBackground();
+
+
         if (wasRight) {
-            changeScreenColor(view, this, 250, R.color.CadetBlue, R.color.green);
+            changeScreenColor(view, this, 250, R.color.LightSteelBlue, R.color.LightGreen);
             // view.setBackgroundColor(getResources().getColor(R.color.green, getTheme()));
         }
         else {
-            changeScreenColor(view, this, 250, R.color.CadetBlue, R.color.red);
+            changeScreenColor(view, this, 250, R.color.LightSteelBlue, R.color.holo_red_light);
         }
         // toggle_buttons(false);
 
@@ -158,8 +192,8 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
 
     private void next_question(boolean wasRight) {
         reset_screen(wasRight);
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem()), 250);
+        addPostDelayed(() -> showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem()), 250);
+        // handle.postDelayed(() -> showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem()), 250);
         // showAnswerLen(flashState.getTimeInterval(), flashState.generateProblem());
     }
 
@@ -187,6 +221,7 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
         Button seven = findViewById(R.id.flash_pad_7);
         Button eight = findViewById(R.id.flash_pad_8);
         Button nine = findViewById(R.id.flash_pad_9);
+        Button special = findViewById(R.id.flash_pad_special);
         zero.setEnabled(enable);
         one.setEnabled(enable);
         two.setEnabled(enable);
@@ -197,10 +232,27 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
         seven.setEnabled(enable);
         eight.setEnabled(enable);
         nine.setEnabled(enable);
+        special.setEnabled(enable);
     }
-
+    /*
     @Override
     protected void toggleScreenContents(boolean areOn) {
+
+        int visibility = areOn ? View.VISIBLE : View.GONE;
+        ViewGroup viewGroup = (ViewGroup) findViewById(R.id.flash_memory_layout);
+        int viewCount = viewGroup.getChildCount();
+
+        for (int i = 0; i < viewCount; ++i) {
+            View v = viewGroup.getChildAt(i);
+            v.setVisibility(visibility);
+        }
+        View countdownTimer = findViewById(R.id.flash_starting_countdown);
+        if (areOn) {
+            countdownTimer.setVisibility(View.GONE);
+        }
+        else {
+            countdownTimer.setVisibility(View.VISIBLE);
+        }
         ConstraintLayout layout = findViewById(R.id.flash_memory_layout);
         if (areOn) {
             layout.setVisibility(View.VISIBLE);
@@ -209,11 +261,13 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
             layout.setVisibility(View.GONE);
         }
     }
+    */
+
 
     @Override
     protected Intent moveToResultsScreen() {
         finish();
-        Intent intent = new Intent(this, Results_Screen.class);
+        Intent intent = new Intent(this, ResultsScreen.class);
         intent.putExtra("TOTAL_SCORE", flashState.getScore());
         intent.putExtra("TOTAL_CORRECT", flashState.getTotalRight());
         intent.putExtra("TOTAL_WRONG", flashState.getTotalWrong());
@@ -223,7 +277,7 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-
+        // disabled, maybe implement a way to make sure that game isnt restarted differently
     }
 
 

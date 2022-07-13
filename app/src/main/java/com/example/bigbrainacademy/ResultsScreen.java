@@ -12,9 +12,8 @@ import android.widget.TextView;
 
 import com.example.bigbrainacademy.databinding.ActivityResultsScreenBinding;
 
-public class Results_Screen extends AppCompatActivity implements ActivityInterface, View.OnClickListener {
+public class ResultsScreen extends AppCompatActivity implements ActivityInterface, View.OnClickListener {
 
-    private ActivityResultsScreenBinding bind;
     private View view;
     private Intent intent;
 
@@ -29,7 +28,7 @@ public class Results_Screen extends AppCompatActivity implements ActivityInterfa
 
     @Override
     public void init_view() {
-        bind = ActivityResultsScreenBinding.inflate(getLayoutInflater());
+        ActivityResultsScreenBinding bind = ActivityResultsScreenBinding.inflate(getLayoutInflater());
         view = bind.getRoot();
         setContentView(view);
 
@@ -61,9 +60,11 @@ public class Results_Screen extends AppCompatActivity implements ActivityInterfa
     @Override
     public void onClick(View view) {
         ActivityScreenEnum prevActivity = (ActivityScreenEnum)intent.getSerializableExtra("PREV_SCREEN");
+        Intent intent = new Intent(this, TestScreen.class);
         switch (view.getId()) {
             case id.result_screen_tryAgain:
-                startActivity(new Intent(this, getPreviousScreen(prevActivity)));
+                intent.putExtra("ACTIVITY_NAME", prevActivity);
+                startActivity(intent);
                 break;
             case id.result_screen_continue:
                 break;
@@ -77,7 +78,7 @@ public class Results_Screen extends AppCompatActivity implements ActivityInterfa
                 ret_val = ChoiceScreen.class;
                 break;
             case ResultsScreen:
-                ret_val = Results_Screen.class;
+                ret_val = ResultsScreen.class;
                 break;
             case FlashMemoryScreen:
                 ret_val = FlashMemoryScreen.class;

@@ -40,4 +40,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation group: 'com.ibm.icu', name:'icu4j', version:'51.1'
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

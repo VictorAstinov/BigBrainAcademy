@@ -146,20 +146,28 @@ public class WrittenMathScreen extends AbstractActivity implements View.OnClickL
         nine.setEnabled(enable);
     }
 
-    @Override
-    protected void toggleScreenContents(boolean areOn) {
 
-    }
 
     private void next_question(boolean wasRight) {
         reset_screen(wasRight);
+        calcState.setInput("");
         final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> {TextView prob = findViewById(id.prob_box_written_math_screen); prob.setText(calcState.generateProblem());}, 250);
+        // this needs to call a function to clear input and generate the problem
+        handler.postDelayed(this::clear_screen, 250);
         // TextView prob = findViewById(id.prob_box_written_math_screen);
         // prob.setText(calcState.generateProblem());
     }
 
+    private void clear_screen() {
+        TextView prob = findViewById(id.prob_box_written_math_screen);
+        TextView input = findViewById(id.input_box_written_math);
+        prob.setText(calcState.generateProblem());
+        input.setText("");
+
+    }
+
     private void reset_screen(boolean wasRight) {
+        calcState.setInput("");
         if (wasRight) {
             changeScreenColor(view, this, 250, R.color.CadetBlue, color.green);
             // view.setBackgroundColor(getResources().getColor(color.green, getTheme()));
@@ -172,7 +180,8 @@ public class WrittenMathScreen extends AbstractActivity implements View.OnClickL
 
     @Override
     protected Intent moveToResultsScreen() {
-        Intent intent = new Intent(this, Results_Screen.class);
+        finish();
+        Intent intent = new Intent(this, ResultsScreen.class);
         intent.putExtra("TOTAL_SCORE", calcState.getScore());
         intent.putExtra("TOTAL_CORRECT", calcState.getTotalRight());
         intent.putExtra("TOTAL_WRONG", calcState.getTotalWrong());

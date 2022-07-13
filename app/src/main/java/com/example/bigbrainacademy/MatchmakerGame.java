@@ -1,6 +1,13 @@
 package com.example.bigbrainacademy;
 
+
+
 // TODO: implement
-abstract public class MatchmakerGame extends AbstractIdentifyGame {
+public class MatchmakerGame extends AbstractIdentifyGame {
+
+    @Override
+    protected void calcScore(boolean wasRight) {
+
+    }
 
 }

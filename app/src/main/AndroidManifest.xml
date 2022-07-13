@@ -10,29 +10,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BigBrainAcademy">
         <activity
-            android:name=".Results_Screen"
+            android:name=".MatchmakerScreen"
             android:exported="false" />
+        <activity
+            android:name=".ResultsScreen"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".FlashMemoryScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".MemoRandomScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".WrittenMathScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".TestScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".PracticeScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".ChoiceScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,5 +1,7 @@
 package com.example.bigbrainacademy;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,10 +11,13 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
@@ -23,6 +28,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
     protected ArrayList<CountDownTimer> countDownTimers = new ArrayList<>();
 
     // private methods for only the abstract base class
+
     private void endTimers() {
         for (CountDownTimer timer : countDownTimers) {
             if (timer != null) {
@@ -30,6 +36,25 @@ public abstract class AbstractActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void circularOutAnimation(View v) {
+        final int xCoor = v.getWidth() / 2;
+        final int yCoor = v.getHeight() / 2;
+        final float radius = (float)Math.hypot(xCoor, yCoor);
+
+        Animator animate = ViewAnimationUtils.createCircularReveal(v, xCoor, yCoor, radius, 0);
+
+        animate.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                v.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        animate.start();
+    }
+
     // methods that could be commonly used in views/controllers
     protected void createAppRuntimeTimer(final int time, TextView text) {
         Context self = this;
@@ -96,28 +121,39 @@ public abstract class AbstractActivity extends AppCompatActivity {
         add_timer(timer);
         timer.start();
     } */
-
-    protected void startCountDownScreen () {
-        // hide all buttons
+    /*
+    protected void startCountDownScreen (final int time, Runnable run) {
+        // hide all buttons and find countdown view
         toggleScreenContents(false);
 
+        TextView countdownTimer = getCountdownView();
+        countdownTimer.setVisibility(View.VISIBLE);
+        // make sure countdownTimer is visible
         // create countdown timer
-        final int time = 3;
-        CountDownTimer timer = new CountDownTimer(time * 1000, 1000) {
+        CountDownTimer timer = new CountDownTimer((time + 1) * 1000, 1000) {
+            int t = time;
             @Override
             public void onTick(long millisUntilFinished) {
-
+                if (millisUntilFinished < 1000) { // last tick
+                    countdownTimer.setText(R.string.test_screen_countdown_end);
+                    return;
+                }
+                countdownTimer.setText(String.valueOf(t));
+                --t;
             }
 
             @Override
             public void onFinish() {
+                circularOutAnimation(countdownTimer);
                 toggleScreenContents(true);
+                run.run();
             }
         };
         add_timer(timer);
         timer.start();
     }
 
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,8 +170,9 @@ public abstract class AbstractActivity extends AppCompatActivity {
     // methods that must be defined by the view/controllers
     protected abstract void init_buttons();
     protected abstract void init_view();
-    protected abstract void toggle_buttons(boolean enable);
-    protected abstract void toggleScreenContents(boolean areOn);
+    protected abstract void toggle_buttons(boolean enable); // might not be needed
+    // protected abstract void toggleScreenContents(boolean areOn); // not needed
     protected abstract Intent moveToResultsScreen();
+    // protected abstract TextView getCountdownView(); // not needed
 
 }
