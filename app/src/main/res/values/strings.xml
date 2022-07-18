@@ -16,5 +16,7 @@
     <string name="results_screen_percent">%% Correct: %1$d</string>
     <string name="results_screen_missed">Missed: %1$d</string>
     <string name="results_screen_correct">Correct: %1$d</string>
+    <string name="matchmaker_screen_pair">%1$d pair</string>
+    <string name="matchmaker_screen_pairs">%1$d pairs</string>
 
 </resources>

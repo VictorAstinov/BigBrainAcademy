@@ -45,11 +45,12 @@ public class ResultsScreen extends AppCompatActivity implements ActivityInterfac
        String score = String.valueOf(intent.getIntExtra("TOTAL_SCORE", 0));
        int totalCorrect = intent.getIntExtra("TOTAL_CORRECT", 0);
        int totalWrong = intent.getIntExtra("TOTAL_WRONG", 0);
+       int percent = Math.round((totalCorrect * 100f) / (totalCorrect + totalWrong));
+
        TextView scoreText = findViewById(id.result_screen_score);
        TextView correctText = findViewById(id.result_screen_total_correct);
        TextView wrongText = findViewById(id.result_screen_total_wrong);
        TextView percentText = findViewById(id.result_screen_percent_correct);
-       int percent = Math.round((totalCorrect * 100f) / (totalCorrect + totalWrong));
 
        scoreText.setText(score);
        correctText.setText(getString(string.results_screen_correct, totalCorrect));

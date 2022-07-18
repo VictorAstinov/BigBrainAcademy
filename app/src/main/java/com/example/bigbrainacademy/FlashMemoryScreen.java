@@ -18,14 +18,15 @@ import com.ibm.icu.text.RuleBasedNumberFormat;
 import java.util.Locale;
 
 public class FlashMemoryScreen extends AbstractActivity implements View.OnClickListener {
+
     private View view;
     private FlashMemory flashState;
     private boolean handlerEnabled = false;
-    private Handler.Callback callback = msg -> {
+    private final Handler.Callback callback = msg -> {
         handlerEnabled = false;
         return false;
     };
-    private Handler handle = new Handler(Looper.getMainLooper(), callback);
+    private final Handler handle = new Handler(Looper.getMainLooper(), callback);
 
 
     private void addPostDelayed(Runnable runnable, final int timeInMS) {
@@ -33,7 +34,7 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
         handle.postDelayed(runnable, timeInMS);
     }
 
-    private Runnable clearTextRunnable = () -> {TextView text = findViewById(R.id.input_box_flash_memory); text.setText("");};
+    private final Runnable clearTextRunnable = () -> {TextView text = findViewById(R.id.input_box_flash_memory); text.setText("");};
 
 
     @Override
@@ -268,7 +269,7 @@ public class FlashMemoryScreen extends AbstractActivity implements View.OnClickL
     protected Intent moveToResultsScreen() {
         finish();
         Intent intent = new Intent(this, ResultsScreen.class);
-        intent.putExtra("TOTAL_SCORE", flashState.getScore());
+        intent.putExtra("TOTAL_SCORE", flashState.getScore()); // these strings should be constants and wrapped in another class
         intent.putExtra("TOTAL_CORRECT", flashState.getTotalRight());
         intent.putExtra("TOTAL_WRONG", flashState.getTotalWrong());
         intent.putExtra("PREV_SCREEN", ActivityScreenEnum.FlashMemoryScreen);

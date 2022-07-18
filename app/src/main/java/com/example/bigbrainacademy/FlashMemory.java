@@ -18,6 +18,7 @@ public class FlashMemory extends AbstractMemorizeGame {
         int flashTimeinMS;
         int length;
         boolean special;
+
         FlashTemplates(int len, int time, boolean special) {
             length = len;
             flashTimeinMS = time;
@@ -31,13 +32,16 @@ public class FlashMemory extends AbstractMemorizeGame {
         templates = new ArrayList<>();
         rng = new Random(123); // set constant seed for testing
         special = special_chars[rng.nextInt(special_chars.length)];
+
         for (int i = 0; i <= DifficultyLevel.S_ELITE.getValue(); ++i) {
             templates.add(new ArrayList<>());
             setTemplate(i, templates.get(i));
         }
+
         generateNewSpecial();
     }
 
+    // this should prob be a static member of FlashTemplates
     private void setTemplate(int difficulty, ArrayList<FlashTemplates> template) {
 
         if (difficulty == DifficultyLevel.SPROUT.getValue()) {

@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -17,15 +15,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 public abstract class AbstractActivity extends AppCompatActivity {
 
     // attributes that could be used in controllers/views
-    protected ArrayList<CountDownTimer> countDownTimers = new ArrayList<>();
+    // TODO: look to replace any CountDownTimer that doesnt use OnTick with a Handler
+    private ArrayList<CountDownTimer> countDownTimers = new ArrayList<>();
 
     // private methods for only the abstract base class
 
@@ -83,6 +80,8 @@ public abstract class AbstractActivity extends AppCompatActivity {
     }
 
     protected void init() {
+        // the only positive to this is that it asserts that the view is initialized before the buttons
+        // which is required, Button initialization might also be a large function
         init_view();
         init_buttons();
     }
@@ -168,11 +167,9 @@ public abstract class AbstractActivity extends AppCompatActivity {
 
 
     // methods that must be defined by the view/controllers
-    protected abstract void init_buttons();
-    protected abstract void init_view();
+    protected abstract void init_buttons(); // do we really need these to be forced, initialization can be done in the ctor call individually
+    protected abstract void init_view(); // ^^^
     protected abstract void toggle_buttons(boolean enable); // might not be needed
-    // protected abstract void toggleScreenContents(boolean areOn); // not needed
-    protected abstract Intent moveToResultsScreen();
-    // protected abstract TextView getCountdownView(); // not needed
+    protected abstract Intent moveToResultsScreen(); // probably need
 
 }

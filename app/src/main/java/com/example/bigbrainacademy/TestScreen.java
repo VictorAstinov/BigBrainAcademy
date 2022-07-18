@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import com.example.bigbrainacademy.databinding.ActivityTestScreenBinding;
 
+import java.math.MathContext;
+
 // view for the test part of the game
-// TODO: this behavior should be apart of AbstractActivity, as a class this will be redundant
-// TODO: change the functionality of this class a a loading screen
+// TODO: This should prob be renamed to countdownScreen or something like that
 public class TestScreen extends AppCompatActivity implements ActivityInterface {
 
     private View view;
@@ -49,7 +50,7 @@ public class TestScreen extends AppCompatActivity implements ActivityInterface {
                 // modify to launch desired activity
                 ActivityScreenEnum activity = (ActivityScreenEnum) intent.getSerializableExtra("ACTIVITY_NAME");
                 if (activity != null) {
-                    // restart activity
+                    // launch desired activity, currently used for restarting an activity, this should prob be generalized for all activities
                     startActivity(new Intent(TestScreen.this, ResultsScreen.getPreviousScreen(activity)));
                 }
                 // this should probably throw an error, this class should only be called when we know what game will be run
