@@ -1,7 +1,5 @@
 package com.example.bigbrainacademy;
 
-
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -9,12 +7,12 @@ import java.util.Random;
 // TODO: implement
 public class MatchmakerGame extends AbstractIdentifyGame {
 
-    private ArrayList<Integer> grid = new ArrayList<>(); // grid of numbers, ensure only {pairs} pairs are made. Rest should be non matching, all done with rng
+    private final ArrayList<Integer> grid = new ArrayList<>();
     private int columns = 0;
     private int pairs = 0;
     private int currentPairs = 0;
-    private ArrayList<ArrayList<MatchmakerTemplate>> templates = new ArrayList<>();
-    private Random rng = new Random();
+    private final ArrayList<ArrayList<MatchmakerTemplate>> templates = new ArrayList<>();
+    private final Random rng = new Random(123);
 
     public static class MatchmakerTemplate {
         int columns; // columns we would like to have, rows = grid.size() / columns (should ensure these are factors for rectangular grids)
@@ -36,6 +34,7 @@ public class MatchmakerGame extends AbstractIdentifyGame {
 
             else if (diffLevel == DifficultyLevel.BEGIN.getValue()) {
                 templateList.add(new MatchmakerTemplate(3, 1, 6));
+                templateList.add(new MatchmakerTemplate(4, 1, 8));
             }
 
             else if (diffLevel == DifficultyLevel.INTER.getValue()) {
@@ -56,7 +55,7 @@ public class MatchmakerGame extends AbstractIdentifyGame {
             }
 
             else {
-                // throw here
+                // throw here for a difficulty level that is too high
                 throw new IllegalArgumentException();
             }
 
@@ -90,6 +89,7 @@ public class MatchmakerGame extends AbstractIdentifyGame {
             grid.add(i);
         }
 
+        // shuffle and remove last (maxSize - size) elements, leaving only the first (size) elements
         Collections.shuffle(grid);
         for (int i = 0; i < maxSize - size; ++i) {
             grid.remove(grid.size() - 1);
@@ -141,6 +141,8 @@ public class MatchmakerGame extends AbstractIdentifyGame {
             int secondPosition = tempList.get(rng.nextInt(tempList.size()));
             grid.set(secondPosition, grid.get(basePosition));
 
+            // remove selected positions from pool, note that since all values are unique there will
+            // never be a repeat
             gridPositions.remove(Integer.valueOf(basePosition));
             gridPositions.remove(Integer.valueOf(secondPosition));
         }
@@ -155,7 +157,7 @@ public class MatchmakerGame extends AbstractIdentifyGame {
 
         columns = randomTemplate.columns;
         pairs = randomTemplate.pairs;
-        currentPairs = 0;
+        currentPairs = 0; // must reset the amount of currently made pairs for the grid
 
         fillGrid(randomTemplate.size);
         addPairs();

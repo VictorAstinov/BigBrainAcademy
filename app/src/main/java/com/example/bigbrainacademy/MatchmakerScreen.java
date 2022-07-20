@@ -24,13 +24,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-// TODO: add the boxes that show the currently matched pairs
+// TODO: add the boxes that show the currently matched pairs, use gridLayout
 public class MatchmakerScreen extends AbstractActivity implements RecyclerViewAdapter.ItemClickListener {
 
     private View mainView;
     private RecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
-    private MatchmakerGame gameState = new MatchmakerGame();
+    private final MatchmakerGame gameState = new MatchmakerGame();
     private PressedButton pressedButton = null;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -91,13 +91,6 @@ public class MatchmakerScreen extends AbstractActivity implements RecyclerViewAd
         super.onCreate(savedInstanceState);
         init();
 
-        /*
-        ArrayList<Integer> data = new ArrayList<>();
-        for (int i = 0; i < 7; ++i) {  // this should be an actual limit determined by the gameState
-            data.add(i);
-        }
-        */
-
         CustomGridLayoutManager layoutManager = new CustomGridLayoutManager(this);
         layoutManager.setScrollEnabled(false);
 
@@ -116,7 +109,7 @@ public class MatchmakerScreen extends AbstractActivity implements RecyclerViewAd
 
         // in theory this should be constant (the width of the button), and we resize the recyclerview
         // to width * cols
-        adapter = new RecyclerViewAdapter(this, data, displayMetrics.widthPixels / cols); // this should be (number above / rows wanted)
+        adapter = new RecyclerViewAdapter(this, data, displayMetrics.widthPixels / cols);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
