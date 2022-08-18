@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BigBrainAcademy">
         <activity
+            android:name=".AnimalLinesScreen"
+            android:exported="false" />
+        <activity
             android:name=".MatchmakerScreen"
             android:exported="false" />
         <activity

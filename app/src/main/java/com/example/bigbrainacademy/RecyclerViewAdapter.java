@@ -1,7 +1,9 @@
 package com.example.bigbrainacademy;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Integer> data;
     private LayoutInflater layoutInflater;
     private ItemClickListener itemClickListener;
+    private ItemTouchListener itemTouchListener;
     private int itemWidth;
 
     // data is passed into the constructor
@@ -49,8 +52,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    // stores and recycles views as they are scrolled off screen, for click events only
+    // OnTouchListener may not be needed
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnTouchListener {
         TextView myTextView;
 
         ViewHolder(View itemView) {
@@ -65,7 +69,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 itemClickListener.onItemClick(view, getAdapterPosition());
             }
         }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            if (itemTouchListener != null) {
+                return itemTouchListener.onItemTouch(view, getAdapterPosition(), event);
+            }
+            else {
+                return true;
+            }
+        }
     }
+
 
     // convenience method for getting data at click position
     Integer getItemValue(int id) {
@@ -77,8 +92,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.itemClickListener = itemClickListener;
     }
 
+    void setTouchListener(ItemTouchListener itemTouchListener) {
+        this.itemTouchListener = itemTouchListener;
+    }
+
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public interface ItemTouchListener {
+        boolean onItemTouch(View view, int position, MotionEvent motionEvent);
     }
 }

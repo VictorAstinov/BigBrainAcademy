@@ -32,7 +32,7 @@ public class ChoiceScreen extends AppCompatActivity implements ActivityInterface
     Button practice_button = findViewById(R.id.practice_button);
     // This should be refactored to be cleaner for multiple buttons
     test_button.setOnClickListener((c) -> startActivity(new Intent(ChoiceScreen.this, TestScreen.class)));
-    practice_button.setOnClickListener((c) -> startActivity(new Intent(ChoiceScreen.this, PracticeScreen.class)));
+    practice_button.setOnClickListener((c) -> startActivity(new Intent(ChoiceScreen.this, AnimalLinesScreen.class)));
   }
 
 }
