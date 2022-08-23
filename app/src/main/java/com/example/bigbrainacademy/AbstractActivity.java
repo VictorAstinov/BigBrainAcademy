@@ -4,6 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -15,14 +21,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public abstract class AbstractActivity extends AppCompatActivity {
 
     // attributes that could be used in controllers/views
-    // TODO: look to replace any CountDownTimer that doesnt use OnTick with a Handler
-    private ArrayList<CountDownTimer> countDownTimers = new ArrayList<>();
+    protected ArrayList<CountDownTimer> countDownTimers = new ArrayList<>();
 
     // private methods for only the abstract base class
 
@@ -80,8 +87,6 @@ public abstract class AbstractActivity extends AppCompatActivity {
     }
 
     protected void init() {
-        // the only positive to this is that it asserts that the view is initialized before the buttons
-        // which is required, Button initialization might also be a large function
         init_view();
         init_buttons();
     }
@@ -165,11 +170,35 @@ public abstract class AbstractActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
 
     // methods that must be defined by the view/controllers
-    protected abstract void init_buttons(); // do we really need these to be forced, initialization can be done in the ctor call individually
-    protected abstract void init_view(); // ^^^
+    protected abstract void init_buttons();
+    protected abstract void init_view();
     protected abstract void toggle_buttons(boolean enable); // might not be needed
-    protected abstract Intent moveToResultsScreen(); // probably need
+    // protected abstract void toggleScreenContents(boolean areOn); // not needed
+    protected abstract Intent moveToResultsScreen();
+    // protected abstract TextView getCountdownView(); // not needed
 
 }

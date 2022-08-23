@@ -28,6 +28,10 @@
             android:exported="false"
             android:screenOrientation="nosensor" />
         <activity
+            android:name=".HeavyweightScreen"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".WrittenMathScreen"
             android:exported="false"
             android:screenOrientation="nosensor" />
